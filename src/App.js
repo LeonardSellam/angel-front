@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import WeekCalendar from 'react-week-calendar';
+import AngelModal from './AngelModal.js';
+import 'react-week-calendar/dist/style.css';
+
+
+
 
 function App() {
+
+  }
+  const [value, onChange] = useState(new Date());
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <WeekCalendar
+          onChange={onChange}
+          value={value}
+          modalComponent={AngelModal}
+        />
+      </div>
   );
 }
-
 export default App;
