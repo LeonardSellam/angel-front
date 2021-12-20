@@ -14,10 +14,12 @@ const defaultProps = {
   value: '',
 };
 
-function callApi() {
-    fetch('http://localhost:5000/event', { method: 'GET' })
+function callApi(body) {
+    fetch('http://localhost:5000/event', { method: 'POST', body: JSON.stringify(body),     headers: {
+        'Content-Type': 'application/json'
+      } })
       .then(data => data.json()) // Parsing the data into a JavaScript object
-      .then(json => alert(JSON.stringify(json))) // Displaying the stringified data in an alert popup
+      .then(json => alert(`Zoom ID: ${json.id} for Topic ${json.topic}`)) // Displaying the stringified data in an alert popup
   }
 
 
@@ -28,7 +30,12 @@ class AngelModal extends React.Component {
 
   handleSave = () => {
     const { value } = this.input;
-    callApi()
+    const {
+        start,
+        end,
+      } = this.props;
+    const body = {val: value, start: start.format(), end: end.format()}
+    callApi(body)
     this.props.onSave({
       value,
     });
